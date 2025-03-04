@@ -1,0 +1,1673 @@
+Evaluating CoxPH...
+CoxPH C-index: 0.7471, AUC: nan
+Evaluating RSF...
+RSF C-index: 0.7235, AUC: nan
+Evaluating GBSA...
+GBSA C-index: 0.6882, AUC: nan
+Evaluating DeepSurv...
+DeepSurv C-index: 0.6529, AUC: nan
+Evaluating DeepHit...
+DeepHit C-index: 0.5176, AUC: nan
+Evaluating NMTLR...
+NMTLR C-index: 0.5882, AUC: nan
+Evaluating svm...
+svm C-index: 0.7412, AUC: nan
+Generating meta-features...
+('CoxPH',) ********************
+Processing Fold 1
+  Training CoxPH
+Processing Fold 2
+  Training CoxPH
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7471
+('RSF',) ********************
+Processing Fold 1
+  Training RSF
+Processing Fold 2
+  Training RSF
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7235
+('GBSA',) ********************
+Processing Fold 1
+  Training GBSA
+Processing Fold 2
+  Training GBSA
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6882
+('DeepSurv',) ********************
+Processing Fold 1
+  Training DeepSurv
+Processing Fold 2
+  Training DeepSurv
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6529
+('DeepHit',) ********************
+Processing Fold 1
+  Training DeepHit
+Processing Fold 2
+  Training DeepHit
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.5176
+('NMTLR',) ********************
+Processing Fold 1
+  Training NMTLR
+Processing Fold 2
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.5882
+('svm',) ********************
+Processing Fold 1
+  Training svm
+Processing Fold 2
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7412
+('CoxPH', 'RSF') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7235
+('CoxPH', 'GBSA') ********************
+Processing Fold 1
+  Training CoxPH
+  Training GBSA
+Processing Fold 2
+  Training CoxPH
+  Training GBSA
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6941
+('CoxPH', 'DeepSurv') ********************
+Processing Fold 1
+  Training CoxPH
+  Training DeepSurv
+Processing Fold 2
+  Training CoxPH
+  Training DeepSurv
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6882
+('CoxPH', 'DeepHit') ********************
+Processing Fold 1
+  Training CoxPH
+  Training DeepHit
+Processing Fold 2
+  Training CoxPH
+  Training DeepHit
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.5529
+('CoxPH', 'NMTLR') ********************
+Processing Fold 1
+  Training CoxPH
+  Training NMTLR
+Processing Fold 2
+  Training CoxPH
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.5471
+('CoxPH', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7471
+('RSF', 'GBSA') ********************
+Processing Fold 1
+  Training RSF
+  Training GBSA
+Processing Fold 2
+  Training RSF
+  Training GBSA
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6941
+('RSF', 'DeepSurv') ********************
+Processing Fold 1
+  Training RSF
+  Training DeepSurv
+Processing Fold 2
+  Training RSF
+  Training DeepSurv
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7235
+('RSF', 'DeepHit') ********************
+Processing Fold 1
+  Training RSF
+  Training DeepHit
+Processing Fold 2
+  Training RSF
+  Training DeepHit
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7059
+('RSF', 'NMTLR') ********************
+Processing Fold 1
+  Training RSF
+  Training NMTLR
+Processing Fold 2
+  Training RSF
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7235
+('RSF', 'svm') ********************
+Processing Fold 1
+  Training RSF
+  Training svm
+Processing Fold 2
+  Training RSF
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7471
+('GBSA', 'DeepSurv') ********************
+Processing Fold 1
+  Training GBSA
+  Training DeepSurv
+Processing Fold 2
+  Training GBSA
+  Training DeepSurv
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6941
+('GBSA', 'DeepHit') ********************
+Processing Fold 1
+  Training GBSA
+  Training DeepHit
+Processing Fold 2
+  Training GBSA
+  Training DeepHit
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6471
+('GBSA', 'NMTLR') ********************
+Processing Fold 1
+  Training GBSA
+  Training NMTLR
+Processing Fold 2
+  Training GBSA
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6941
+('GBSA', 'svm') ********************
+Processing Fold 1
+  Training GBSA
+  Training svm
+Processing Fold 2
+  Training GBSA
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7529
+('DeepSurv', 'DeepHit') ********************
+Processing Fold 1
+  Training DeepSurv
+  Training DeepHit
+Processing Fold 2
+  Training DeepSurv
+  Training DeepHit
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.5471
+('DeepSurv', 'NMTLR') ********************
+Processing Fold 1
+  Training DeepSurv
+  Training NMTLR
+Processing Fold 2
+  Training DeepSurv
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6824
+('DeepSurv', 'svm') ********************
+Processing Fold 1
+  Training DeepSurv
+  Training svm
+Processing Fold 2
+  Training DeepSurv
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7471
+('DeepHit', 'NMTLR') ********************
+Processing Fold 1
+  Training DeepHit
+  Training NMTLR
+Processing Fold 2
+  Training DeepHit
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.5294
+('DeepHit', 'svm') ********************
+Processing Fold 1
+  Training DeepHit
+  Training svm
+Processing Fold 2
+  Training DeepHit
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7706
+('NMTLR', 'svm') ********************
+Processing Fold 1
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7471
+('CoxPH', 'RSF', 'GBSA') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training GBSA
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training GBSA
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6941
+('CoxPH', 'RSF', 'DeepSurv') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training DeepSurv
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training DeepSurv
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7235
+('CoxPH', 'RSF', 'DeepHit') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training DeepHit
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training DeepHit
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6941
+('CoxPH', 'RSF', 'NMTLR') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training NMTLR
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7235
+('CoxPH', 'RSF', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7588
+('CoxPH', 'GBSA', 'DeepSurv') ********************
+Processing Fold 1
+  Training CoxPH
+  Training GBSA
+  Training DeepSurv
+Processing Fold 2
+  Training CoxPH
+  Training GBSA
+  Training DeepSurv
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6941
+('CoxPH', 'GBSA', 'DeepHit') ********************
+Processing Fold 1
+  Training CoxPH
+  Training GBSA
+  Training DeepHit
+Processing Fold 2
+  Training CoxPH
+  Training GBSA
+  Training DeepHit
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6353
+('CoxPH', 'GBSA', 'NMTLR') ********************
+Processing Fold 1
+  Training CoxPH
+  Training GBSA
+  Training NMTLR
+Processing Fold 2
+  Training CoxPH
+  Training GBSA
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6882
+('CoxPH', 'GBSA', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training GBSA
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training GBSA
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7529
+('CoxPH', 'DeepSurv', 'DeepHit') ********************
+Processing Fold 1
+  Training CoxPH
+  Training DeepSurv
+  Training DeepHit
+Processing Fold 2
+  Training CoxPH
+  Training DeepSurv
+  Training DeepHit
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.5529
+('CoxPH', 'DeepSurv', 'NMTLR') ********************
+Processing Fold 1
+  Training CoxPH
+  Training DeepSurv
+  Training NMTLR
+Processing Fold 2
+  Training CoxPH
+  Training DeepSurv
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6294
+('CoxPH', 'DeepSurv', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training DeepSurv
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training DeepSurv
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7588
+('CoxPH', 'DeepHit', 'NMTLR') ********************
+Processing Fold 1
+  Training CoxPH
+  Training DeepHit
+  Training NMTLR
+Processing Fold 2
+  Training CoxPH
+  Training DeepHit
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.5235
+('CoxPH', 'DeepHit', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training DeepHit
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training DeepHit
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7529
+('CoxPH', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6706
+('RSF', 'GBSA', 'DeepSurv') ********************
+Processing Fold 1
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+Processing Fold 2
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6824
+('RSF', 'GBSA', 'DeepHit') ********************
+Processing Fold 1
+  Training RSF
+  Training GBSA
+  Training DeepHit
+Processing Fold 2
+  Training RSF
+  Training GBSA
+  Training DeepHit
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6882
+('RSF', 'GBSA', 'NMTLR') ********************
+Processing Fold 1
+  Training RSF
+  Training GBSA
+  Training NMTLR
+Processing Fold 2
+  Training RSF
+  Training GBSA
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6882
+('RSF', 'GBSA', 'svm') ********************
+Processing Fold 1
+  Training RSF
+  Training GBSA
+  Training svm
+Processing Fold 2
+  Training RSF
+  Training GBSA
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7353
+('RSF', 'DeepSurv', 'DeepHit') ********************
+Processing Fold 1
+  Training RSF
+  Training DeepSurv
+  Training DeepHit
+Processing Fold 2
+  Training RSF
+  Training DeepSurv
+  Training DeepHit
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7235
+('RSF', 'DeepSurv', 'NMTLR') ********************
+Processing Fold 1
+  Training RSF
+  Training DeepSurv
+  Training NMTLR
+Processing Fold 2
+  Training RSF
+  Training DeepSurv
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7000
+('RSF', 'DeepSurv', 'svm') ********************
+Processing Fold 1
+  Training RSF
+  Training DeepSurv
+  Training svm
+Processing Fold 2
+  Training RSF
+  Training DeepSurv
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7235
+('RSF', 'DeepHit', 'NMTLR') ********************
+Processing Fold 1
+  Training RSF
+  Training DeepHit
+  Training NMTLR
+Processing Fold 2
+  Training RSF
+  Training DeepHit
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6412
+('RSF', 'DeepHit', 'svm') ********************
+Processing Fold 1
+  Training RSF
+  Training DeepHit
+  Training svm
+Processing Fold 2
+  Training RSF
+  Training DeepHit
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7765
+('RSF', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training RSF
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training RSF
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7529
+('GBSA', 'DeepSurv', 'DeepHit') ********************
+Processing Fold 1
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+Processing Fold 2
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7118
+('GBSA', 'DeepSurv', 'NMTLR') ********************
+Processing Fold 1
+  Training GBSA
+  Training DeepSurv
+  Training NMTLR
+Processing Fold 2
+  Training GBSA
+  Training DeepSurv
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6765
+('GBSA', 'DeepSurv', 'svm') ********************
+Processing Fold 1
+  Training GBSA
+  Training DeepSurv
+  Training svm
+Processing Fold 2
+  Training GBSA
+  Training DeepSurv
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7529
+('GBSA', 'DeepHit', 'NMTLR') ********************
+Processing Fold 1
+  Training GBSA
+  Training DeepHit
+  Training NMTLR
+Processing Fold 2
+  Training GBSA
+  Training DeepHit
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6647
+('GBSA', 'DeepHit', 'svm') ********************
+Processing Fold 1
+  Training GBSA
+  Training DeepHit
+  Training svm
+Processing Fold 2
+  Training GBSA
+  Training DeepHit
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7588
+('GBSA', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training GBSA
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training GBSA
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7353
+('DeepSurv', 'DeepHit', 'NMTLR') ********************
+Processing Fold 1
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+Processing Fold 2
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6471
+('DeepSurv', 'DeepHit', 'svm') ********************
+Processing Fold 1
+  Training DeepSurv
+  Training DeepHit
+  Training svm
+Processing Fold 2
+  Training DeepSurv
+  Training DeepHit
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7529
+('DeepSurv', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training DeepSurv
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training DeepSurv
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7412
+('DeepHit', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6941
+('CoxPH', 'RSF', 'GBSA', 'DeepSurv') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6941
+('CoxPH', 'RSF', 'GBSA', 'DeepHit') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepHit
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepHit
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7118
+('CoxPH', 'RSF', 'GBSA', 'NMTLR') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training NMTLR
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6882
+('CoxPH', 'RSF', 'GBSA', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7588
+('CoxPH', 'RSF', 'DeepSurv', 'DeepHit') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training DeepSurv
+  Training DeepHit
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training DeepSurv
+  Training DeepHit
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7118
+('CoxPH', 'RSF', 'DeepSurv', 'NMTLR') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training DeepSurv
+  Training NMTLR
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training DeepSurv
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7118
+('CoxPH', 'RSF', 'DeepSurv', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training DeepSurv
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training DeepSurv
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7294
+('CoxPH', 'RSF', 'DeepHit', 'NMTLR') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training DeepHit
+  Training NMTLR
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training DeepHit
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7294
+('CoxPH', 'RSF', 'DeepHit', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training DeepHit
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training DeepHit
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7647
+('CoxPH', 'RSF', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7588
+('CoxPH', 'GBSA', 'DeepSurv', 'DeepHit') ********************
+Processing Fold 1
+  Training CoxPH
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+Processing Fold 2
+  Training CoxPH
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6706
+('CoxPH', 'GBSA', 'DeepSurv', 'NMTLR') ********************
+Processing Fold 1
+  Training CoxPH
+  Training GBSA
+  Training DeepSurv
+  Training NMTLR
+Processing Fold 2
+  Training CoxPH
+  Training GBSA
+  Training DeepSurv
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6882
+('CoxPH', 'GBSA', 'DeepSurv', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training GBSA
+  Training DeepSurv
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training GBSA
+  Training DeepSurv
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7588
+('CoxPH', 'GBSA', 'DeepHit', 'NMTLR') ********************
+Processing Fold 1
+  Training CoxPH
+  Training GBSA
+  Training DeepHit
+  Training NMTLR
+Processing Fold 2
+  Training CoxPH
+  Training GBSA
+  Training DeepHit
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7000
+('CoxPH', 'GBSA', 'DeepHit', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training GBSA
+  Training DeepHit
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training GBSA
+  Training DeepHit
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7471
+('CoxPH', 'GBSA', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training GBSA
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training GBSA
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7647
+('CoxPH', 'DeepSurv', 'DeepHit', 'NMTLR') ********************
+Processing Fold 1
+  Training CoxPH
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+Processing Fold 2
+  Training CoxPH
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.5235
+('CoxPH', 'DeepSurv', 'DeepHit', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training DeepSurv
+  Training DeepHit
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training DeepSurv
+  Training DeepHit
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7647
+('CoxPH', 'DeepSurv', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training DeepSurv
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training DeepSurv
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7471
+('CoxPH', 'DeepHit', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7706
+('RSF', 'GBSA', 'DeepSurv', 'DeepHit') ********************
+Processing Fold 1
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+Processing Fold 2
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7176
+('RSF', 'GBSA', 'DeepSurv', 'NMTLR') ********************
+Processing Fold 1
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training NMTLR
+Processing Fold 2
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6941
+('RSF', 'GBSA', 'DeepSurv', 'svm') ********************
+Processing Fold 1
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training svm
+Processing Fold 2
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7118
+('RSF', 'GBSA', 'DeepHit', 'NMTLR') ********************
+Processing Fold 1
+  Training RSF
+  Training GBSA
+  Training DeepHit
+  Training NMTLR
+Processing Fold 2
+  Training RSF
+  Training GBSA
+  Training DeepHit
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7000
+('RSF', 'GBSA', 'DeepHit', 'svm') ********************
+Processing Fold 1
+  Training RSF
+  Training GBSA
+  Training DeepHit
+  Training svm
+Processing Fold 2
+  Training RSF
+  Training GBSA
+  Training DeepHit
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7588
+('RSF', 'GBSA', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training RSF
+  Training GBSA
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training RSF
+  Training GBSA
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7471
+('RSF', 'DeepSurv', 'DeepHit', 'NMTLR') ********************
+Processing Fold 1
+  Training RSF
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+Processing Fold 2
+  Training RSF
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7176
+('RSF', 'DeepSurv', 'DeepHit', 'svm') ********************
+Processing Fold 1
+  Training RSF
+  Training DeepSurv
+  Training DeepHit
+  Training svm
+Processing Fold 2
+  Training RSF
+  Training DeepSurv
+  Training DeepHit
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7588
+('RSF', 'DeepSurv', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training RSF
+  Training DeepSurv
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training RSF
+  Training DeepSurv
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7412
+('RSF', 'DeepHit', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training RSF
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training RSF
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7353
+('GBSA', 'DeepSurv', 'DeepHit', 'NMTLR') ********************
+Processing Fold 1
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+Processing Fold 2
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6824
+('GBSA', 'DeepSurv', 'DeepHit', 'svm') ********************
+Processing Fold 1
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training svm
+Processing Fold 2
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6529
+('GBSA', 'DeepSurv', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training GBSA
+  Training DeepSurv
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training GBSA
+  Training DeepSurv
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7471
+('GBSA', 'DeepHit', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training GBSA
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training GBSA
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7176
+('DeepSurv', 'DeepHit', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7588
+('CoxPH', 'RSF', 'GBSA', 'DeepSurv', 'DeepHit') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7000
+('CoxPH', 'RSF', 'GBSA', 'DeepSurv', 'NMTLR') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training NMTLR
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6941
+('CoxPH', 'RSF', 'GBSA', 'DeepSurv', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7588
+('CoxPH', 'RSF', 'GBSA', 'DeepHit', 'NMTLR') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepHit
+  Training NMTLR
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepHit
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6941
+('CoxPH', 'RSF', 'GBSA', 'DeepHit', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepHit
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepHit
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7176
+('CoxPH', 'RSF', 'GBSA', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7529
+('CoxPH', 'RSF', 'DeepSurv', 'DeepHit', 'NMTLR') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7353
+('CoxPH', 'RSF', 'DeepSurv', 'DeepHit', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training DeepSurv
+  Training DeepHit
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training DeepSurv
+  Training DeepHit
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7118
+('CoxPH', 'RSF', 'DeepSurv', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training DeepSurv
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training DeepSurv
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7294
+('CoxPH', 'RSF', 'DeepHit', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7588
+('CoxPH', 'GBSA', 'DeepSurv', 'DeepHit', 'NMTLR') ********************
+Processing Fold 1
+  Training CoxPH
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+Processing Fold 2
+  Training CoxPH
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7059
+('CoxPH', 'GBSA', 'DeepSurv', 'DeepHit', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7647
+('CoxPH', 'GBSA', 'DeepSurv', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training GBSA
+  Training DeepSurv
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training GBSA
+  Training DeepSurv
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7471
+('CoxPH', 'GBSA', 'DeepHit', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training GBSA
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training GBSA
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7647
+('CoxPH', 'DeepSurv', 'DeepHit', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7765
+('RSF', 'GBSA', 'DeepSurv', 'DeepHit', 'NMTLR') ********************
+Processing Fold 1
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+Processing Fold 2
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7059
+('RSF', 'GBSA', 'DeepSurv', 'DeepHit', 'svm') ********************
+Processing Fold 1
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training svm
+Processing Fold 2
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7118
+('RSF', 'GBSA', 'DeepSurv', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7294
+('RSF', 'GBSA', 'DeepHit', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training RSF
+  Training GBSA
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training RSF
+  Training GBSA
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7412
+('RSF', 'DeepSurv', 'DeepHit', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training RSF
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training RSF
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7647
+('GBSA', 'DeepSurv', 'DeepHit', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7647
+('CoxPH', 'RSF', 'GBSA', 'DeepSurv', 'DeepHit', 'NMTLR') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7059
+('CoxPH', 'RSF', 'GBSA', 'DeepSurv', 'DeepHit', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7529
+('CoxPH', 'RSF', 'GBSA', 'DeepSurv', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7176
+('CoxPH', 'RSF', 'GBSA', 'DeepHit', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7059
+('CoxPH', 'RSF', 'DeepSurv', 'DeepHit', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7353
+('CoxPH', 'GBSA', 'DeepSurv', 'DeepHit', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.6412
+('RSF', 'GBSA', 'DeepSurv', 'DeepHit', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7176
+('CoxPH', 'RSF', 'GBSA', 'DeepSurv', 'DeepHit', 'NMTLR', 'svm') ********************
+Processing Fold 1
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Processing Fold 2
+  Training CoxPH
+  Training RSF
+  Training GBSA
+  Training DeepSurv
+  Training DeepHit
+  Training NMTLR
+  Training svm
+Training Super Learner...
+Generating test meta-features...
+Super Learner C-index: 0.7294
