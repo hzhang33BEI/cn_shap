@@ -280,18 +280,24 @@ if __name__ == '__main__':
     all_columns.remove('Status')
     all_columns.remove('time')
     
-    from IPython import embed;embed()
-    exit()
     feature_subsets = []
     for n in range(1, len(all_columns) + 1):
         for subset in itertools.combinations(all_columns, n):
-            if len(list(subset)) < 5:
-                continue
-            feature_subsets.append(list(subset))
+            # if len(list(subset)) < 5:
+            #     continue
+            if len(list(feature_subsets)) % 1000 == 0:
+                break
+            if len(list(subset)) % 1 == 0:
+                feature_subsets.append(list(subset))
     
     total_combinations = len(feature_subsets)
 
-    model_names = ["CoxPH", "RSF", "GBSA", "DeepSurv", "DeepHit", "NMTLR", "svm"]
+    # 按特征长度降序排序
+    feature_subsets.sort(key=lambda x: len(x), reverse=True)
+    total_combinations = len(feature_subsets)
+
+    model_names = ["CoxPH", "DeepSurv", "DeepHit", "NMTLR", "svm",  "RSF", "GBSA"]
+
     for model_name in model_names:
         print("{} processing {} {}".format("*"*10, model_name, "*"*10))
         # 初始化最佳值
@@ -313,33 +319,46 @@ if __name__ == '__main__':
         # 将 handler 添加到 logger
         logger.addHandler(file_handler)
         
+        best_c_index_accumulate  = 0
+
+        best_c_index_accumulate_index = {'CoxPH': 20000, 'RSF': 5000, 'GBSA': 5000, 'DeepSurv': 20000, 'DeepHit': 20000, 'NMTLR': 20000, 'svm': 20000}
+        # best_c_index_accumulate_index = {'CoxPH': 1000, 'RSF': 40, 'GBSA': 40, 'DeepSurv': 100, 'DeepHit': 50, 'NMTLR': 50, 'svm': 100}
+        FLAG = True
 
         with tqdm(total=total_combinations, desc="Searching for best feature combination") as pbar:
             for n in range(1, len(all_columns) + 1)[::-1]:
-                for feature_subset in itertools.combinations(all_columns, n):
-                    current_features = feature_subset = list(feature_subset)
-                    if len(current_features) < 23:
-                        continue
-                    from IPython import embed;embed()
-                    exit(0)
-                    X_train_scaled, X_train, y_train, X_test_scaled, X_test, y_test, y_train_df, y_test_df,scaler = preprocess_data(data=data, features=current_features)
-                    current_model = train_base_models(model_name, X_train_scaled, X_train, y_train, X_test_scaled, X_test, y_test, y_train_df, y_test_df)
-                    if model_name in ['CoxPH']:
-                        # 对于CoxPH和DeepSurv，直接使用X_test
-                        current_c_index = evaluate_models(current_model[model_name], model_name, X_test, y_test)
-                    else:
-                        # 其他模型使用X_test_scaled
-                        current_c_index = evaluate_models(current_model[model_name], model_name, X_test_scaled, y_test)
-                    # 记录每个组合的评估结果到日志文件
-                    logger.info(f"Evaluating {current_features}: C-index = {current_c_index}")
-                    
-                    # 如果找到更好的C-index，则更新
-                    if current_c_index > best_c_index:
-                        best_c_index = current_c_index
-                        best_features = feature_subset
-                        logger.info(f"New best C-index: {best_c_index} with features {best_features}")
-                    
-                    pbar.update(1)  # 更新进度条
+                if FLAG:
+                    for feature_subset in itertools.combinations(all_columns, n):
+                    # for feature_subset in feature_subsets:
+                        if best_c_index_accumulate > best_c_index_accumulate_index[model_name]:
+                            FLAG = False
+                            break
+                        current_features = feature_subset = list(feature_subset)
+                        # if len(current_features) < 5:
+                        #     continue
+                        X_train_scaled, X_train, y_train, X_test_scaled, X_test, y_test, y_train_df, y_test_df,scaler = preprocess_data(data=data, features=current_features)
+                        current_model = train_base_models(model_name, X_train_scaled, X_train, y_train, X_test_scaled, X_test, y_test, y_train_df, y_test_df)
+                        if model_name  =='CoxPH':
+                            # 对于CoxPH和DeepSurv，直接使用X_test
+                            current_c_index = evaluate_models(current_model[model_name], model_name, X_test, y_test)
+                        else:
+                            # 其他模型使用X_test_scaled
+                            current_c_index = evaluate_models(current_model[model_name], model_name, X_test_scaled, y_test)
+                        # 记录每个组合的评估结果到日志文件
+                        logger.info(f"Evaluating {current_features}: C-index = {current_c_index}")
+                        
+
+                        best_c_index_accumulate += 1
+                        # 如果找到更好的C-index，则更新
+                        if current_c_index > best_c_index:
+                            best_c_index = current_c_index
+                            best_features = feature_subset
+                            best_c_index_accumulate = 0
+                            logger.info(f"New best C-index: {best_c_index} with features {best_features}")
+                        
+                        pbar.update(1)  # 更新进度条
+                else:
+                    break
 
         # 输出最终结果
         logger.info(f"Best C-index: {best_c_index}")
