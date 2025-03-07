@@ -165,6 +165,8 @@ def evaluate_model_at_time(model, name, X, y, time_point):
     # 获取每个样本在指定时间点的事件概率
     event_prob = []
     if name == 'CoxPH':
+        # from IPython import embed;embed()
+        # exit()
         baseline_survival = model.baseline_survival_
         times_cox = baseline_survival.index.values
         pos = np.searchsorted(times_cox, time_point, side='right') - 1
@@ -178,16 +180,21 @@ def evaluate_model_at_time(model, name, X, y, time_point):
         surv_prob = np.power(s0_t, np.exp(risk_scores))
         event_prob = 1 - surv_prob
     elif name == 'RSF':
-        # RandomSurvivalForest 的 predict_survival_function 返回数组
-        surv_funcs = model.predict_survival_function(X)
-        times = model.event_times_
-        pos = np.searchsorted(times, time_point, side='right') - 1
-        if pos < 0:
-            event_prob = 1 - surv_funcs[:, 0]
-        elif pos >= len(times):
-            event_prob = 1 - surv_funcs[:, -1]
-        else:
-            event_prob = 1 - surv_funcs[:, pos]
+        # # RandomSurvivalForest 的 predict_survival_function 返回数组
+        # surv_funcs = model.predict_survival_function(X)
+        # times = model.event_times_
+        # pos = np.searchsorted(times, time_point, side='right') - 1
+        # if pos < 0:
+        #     event_prob = 1 - surv_funcs[:, 0]
+        # elif pos >= len(times):
+        #     event_prob = 1 - surv_funcs[:, -1]
+        # else:
+        #     from IPython import embed;embed()
+        #     exit()
+        #     event_prob = 1 - surv_funcs[:, pos]
+        risk_scores = model.predict(X)
+        # 将风险分数转换为事件概率（假设风险分数越高，事件概率越高）
+        event_prob = 1 / (1 + np.exp(-risk_scores))
     elif name == 'GBSA':
         # GradientBoostingSurvivalAnalysis 返回风险分数
         risk_scores = model.predict(X)
@@ -197,7 +204,7 @@ def evaluate_model_at_time(model, name, X, y, time_point):
         times_array = np.array([time_point])
         survival = model.predict_survival(X.values, times_array).flatten()
         event_prob = 1 - survival
-        event_prob = np.clip(event_prob, 0, 1)  # 将超出范围的值裁剪到 [0, 1]
+        # event_prob = np.clip(event_prob, 0, 1)  # 将超出范围的值裁剪到 [0, 1]
         # from IPython import embed;embed()
         # exit()
     elif name in ['DeepHit', 'NMTLR']:    
@@ -211,17 +218,35 @@ def evaluate_model_at_time(model, name, X, y, time_point):
         elif closest_idx >= len(available_times):
             closest_idx = len(available_times) - 1
         event_prob = 1 - surv_df.iloc[closest_idx].values
+        # from IPython import embed;embed()
+        # exit()
+        # event_prob = np.clip(event_prob, 0, 1)  # 将超出范围的值裁剪到 [0, 1]
+    elif name == 'svm':
+        risk_scores = model.predict(X)
+        # 将风险分数转换为事件概率（假设风险分数越高，事件概率越高）
+        event_prob = 1 / (1 + np.exp(-risk_scores))  # 使用逻辑函数转换
     else:
         event_prob = model.predict(X)
     
     # 构建二元标签（排除在指定时间点之前删失的样本）
-    mask = (y['time'] > time_point) | (y['event'] == 1)
-    y_binary = ((y['time'] <= time_point) & y['event']).astype(int)
+    # from IPython import embed;embed()
+    # exit()
+    # mask = (y['time'] > time_point) | (y['event'] == 1)
+    # mask = (y['time'] <= time_point)
+    # # y_binary = ((y['time'] <= time_point) & y['event']).astype(int)
+    # y_binary = ((y['time'] <= time_point)).astype(int)
+    # y_binary_filtered = y_binary[mask]
+    # event_prob_filtered = np.array(event_prob)[mask]
+    
+    mask = (y['time'] <= time_point) | (y['event'] == 1)
+    y_binary = (y['event']).astype(int)
     y_binary_filtered = y_binary[mask]
     event_prob_filtered = np.array(event_prob)[mask]
     
     # 计算AUC和ROC曲线
     if len(np.unique(y_binary_filtered)) >= 2:
+        # from IPython import embed;embed()
+        # exit()
         fpr, tpr, _ = roc_curve(y_binary_filtered, event_prob_filtered)
         roc_auc = auc(fpr, tpr)
         results['AUC'] = roc_auc

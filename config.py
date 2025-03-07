@@ -6,9 +6,9 @@ import numpy as np
 SEED = 42
 DATA_PATH = 'data/data_cox1.csv'
 TIME_POINTS = [12, 36, 60, 120]  # 1,3,5,10年（单位：月）
-best_params_deephit = {'lr': 0.0001, 'num_epochs': 200, 'batch_size': 256, 'num_nodes': [64, 64], 'dropout': 0.2, 'num_durations': 120} 
-best_params_nmtlr = {'lr': 0.001, 'num_epochs': 200, 'batch_size': 512, 'num_nodes': [32, 32], 'dropout': 0.2, 'num_durations': 120}
-best_params_ds = {'lr': 0.001, 'num_epochs': 200, 'optimizer': 'adam'} 
+best_params_deephit = {'lr': 0.0001, 'num_epochs': 100, 'batch_size': 8, 'num_nodes': [64, 64], 'dropout': 0.2, 'num_durations': 36} 
+best_params_nmtlr = {'lr': 0.001, 'num_epochs': 100, 'batch_size': 8, 'num_nodes': [32, 32], 'dropout': 0.2, 'num_durations': 36}
+best_params_ds = {'lr': 0.001, 'num_epochs': 100, 'optimizer': 'adam'} 
 best_params_xgb = {
         'objective': 'survival:cox', 
         'eval_metric': 'cox-nloglik', 
