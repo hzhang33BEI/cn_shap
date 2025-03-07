@@ -57,12 +57,16 @@ def plot_rfs_calibration(model,model_name, X_test, y_test, max_time=None, n_poin
         baseline_surv = model.baseline_survival_.values.ravel()
         pred_surv = np.array([baseline_surv ** np.exp(score) for score in risk_scores])
         pred_surv = pred_surv.mean(axis=0)
-    else:
-        # 深度学习模型的生存函数预测
+    elif model_name in ['DeepHit', 'NMTLR']:
+        # 深度学习模型处理
         x_tensor = torch.tensor(X_test.values.astype('float32'))
         surv_df = model.predict_surv_df(x_tensor)
         pred_times = surv_df.index.values
-        pred_surv = surv_df.values.mean(axis=1)
+        pred_surv = surv_df.values.mean(axis=1)  
+    else:  # GBSA等树模型
+        surv_funcs = model.predict_survival_function(X_test)
+        pred_times = model.event_times_
+        pred_surv = np.array([fn(pred_times) for fn in surv_funcs]).mean(axis=0)
     
     # 设置时间范围
     max_time = max_time or min(event_times.max(), pred_times.max())
