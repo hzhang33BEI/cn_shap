@@ -16,6 +16,56 @@ import torchtuples as tt
 from pycox.models import DeepHitSingle, mtlr
 from pycox.preprocessing.label_transforms import LabTransDiscreteTime
 from config import SEED, best_params_deephit, best_params_nmtlr, best_params_ds
+import logging
+import itertools
+
+def get_meta_data(super_learner_fit_models, X_val, t_median):
+    n_samples = X_val.shape[0]
+    n_models = len(super_learner_fit_models)
+    meta_features = np.zeros((n_samples, n_models))
+
+    model_idx = -1
+    for name, model in super_learner_fit_models.items():
+        model_idx += 1
+        if name == 'CoxPH':
+            pred = model.predict_partial_hazard(X_val)
+        else:
+            # 标准化数据
+            # X_val_scaled = scaler.transform(X_val)
+            # data have already scalered
+            X_val_scaled = X_val
+            X_val_scaled = pd.DataFrame(X_val_scaled, columns=X_val.columns)
+            
+            if name == 'RSF':
+                pred = model.predict(X_val_scaled)
+            elif name == 'GBSA':
+                pred = model.predict(X_val_scaled)
+            elif name == 'svm':
+                pred = model.predict(X_val_scaled)
+            elif name == 'DeepSurv':
+                pred = model.predict_risk(X_val_scaled)
+            elif name == 'DeepHit':
+                surv = model.predict_surv_df(X_val_scaled.values.astype('float32'))
+                times = np.array(surv.index)
+                idx = np.argmin(np.abs(times - t_median))
+                pred = 1 - surv.iloc[idx].values
+            
+            elif name == 'NMTLR':
+                
+                # 生成预测
+                x_tensor = torch.tensor(X_val_scaled.values.astype('float32'))
+                surv_df = model.predict_surv_df(x_tensor)
+                available_times = np.array(surv_df.index, dtype=float)
+                closest_time = available_times[np.argmin(np.abs(available_times - t_median))]
+                # 获取预测风险值并归一化
+                pred = 1 - surv_df.loc[closest_time].values
+                pred = (pred - pred.min()) / (pred.max() - pred.min())
+            
+        # 归一化预测值
+        pred = (pred - np.min(pred)) / (np.max(pred) - np.min(pred))
+        meta_features[:, model_idx] = pred
+        
+    return pd.DataFrame(meta_features, columns=super_learner_fit_models.keys())   
 
 
 # 定义生成交叉验证元特征的函数
@@ -24,6 +74,8 @@ def generate_meta_features(models, X_train, y_train_df, scaler, cv):
     n_models = len(models)
     meta_features = np.zeros((n_samples, n_models))
     model_names = list(models.keys())
+
+    super_learner_fit_models = {}
     
     for fold, (train_idx, val_idx) in enumerate(cv.split(X_train)):
         print(f"Processing Fold {fold+1}")
@@ -40,6 +92,7 @@ def generate_meta_features(models, X_train, y_train_df, scaler, cv):
                 model = CoxPHFitter(penalizer=0.1)
                 model.fit(train_data, 'time', 'status')
                 pred = model.predict_partial_hazard(X_val)
+                super_learner_fit_models['CoxPH'] = model
             else:
                 # 标准化数据
                 X_tr_scaled = scaler.transform(X_tr)
@@ -53,17 +106,20 @@ def generate_meta_features(models, X_train, y_train_df, scaler, cv):
                     y_tr_struct = Surv.from_arrays(y_tr['status'], y_tr['time'])
                     model.fit(X_tr_scaled, y_tr_struct)
                     pred = model.predict(X_val_scaled)
+                    super_learner_fit_models['RSF'] = model
                 elif name == 'GBSA':
                     model = GradientBoostingSurvivalAnalysis(**models[name].get_params())
                     y_tr_struct = Surv.from_arrays(y_tr['status'], y_tr['time'])
                     model.fit(X_tr_scaled, y_tr_struct)
                     pred = model.predict(X_val_scaled)
+                    super_learner_fit_models['GBSA'] = model
                 elif name == 'svm':
                     from sksurv.svm import FastSurvivalSVM
                     model = FastSurvivalSVM()
                     y_tr_struct = Surv.from_arrays(y_tr['status'], y_tr['time'])
                     model.fit(X_tr_scaled, y_tr_struct)
                     pred = model.predict(X_val_scaled)
+                    super_learner_fit_models['svm'] = model
                 elif name == 'DeepSurv':
                     model = LinearMultiTaskModel()
                     model.fit(X_tr_scaled, y_tr['time'].values, y_tr['status'].values,
@@ -73,6 +129,7 @@ def generate_meta_features(models, X_train, y_train_df, scaler, cv):
                              num_epochs=best_params_ds['num_epochs'],
                              verbose=False)
                     pred = model.predict_risk(X_val_scaled)
+                    super_learner_fit_models['DeepSurv'] = model
                 elif name == 'DeepHit':
                     labtrans = LabTransDiscreteTime(best_params_deephit['num_durations'])
                     durations = y_tr['time'].values
@@ -100,6 +157,7 @@ def generate_meta_features(models, X_train, y_train_df, scaler, cv):
                     times = np.array(surv.index)
                     idx = np.argmin(np.abs(times - t_median))
                     pred = 1 - surv.iloc[idx].values
+                    super_learner_fit_models['DeepHit'] = model
                 
                 elif name == 'NMTLR':
                     # 数据标准化（使用当前折的scaler）
@@ -150,18 +208,42 @@ def generate_meta_features(models, X_train, y_train_df, scaler, cv):
                     # 获取预测风险值并归一化
                     pred = 1 - surv_df.loc[closest_time].values
                     pred = (pred - pred.min()) / (pred.max() - pred.min())
+                    super_learner_fit_models['NMTLR'] = model
                 
             # 归一化预测值
             pred = (pred - np.min(pred)) / (np.max(pred) - np.min(pred))
             meta_features[val_idx, model_idx] = pred
             
-    return pd.DataFrame(meta_features, columns=model_names)
+    return pd.DataFrame(meta_features, columns=model_names), super_learner_fit_models
 
 
-import logging
-import itertools
+def specific_super_learner_training(models, candidate_model_name, X_train, y_train_df, X_test, y_test, scaler, y_train=None):
+    # 生成元特征
+    kf = KFold(n_splits=5, shuffle=True, random_state=SEED)
+    print("Generating meta-features...")
+    logging.info("Generating meta-features...")
+    # from IPython import embed;embed()
+    # exit()
 
-def models_super_learner(models, X_train, y_train_df, X_test, y_test, scaler, y_train=None, external_X_test=None, external_y_test=None, external_scaler=None):
+    candidate_model = []
+    for cn_ in candidate_model_name:
+        candidate_model.append(models[cn_])
+
+    super_learner_models = dict(zip(candidate_model_name, candidate_model))
+    
+    # logging.info("Super learner for : {} ".format(candidate_model_name))
+    meta_train, super_learner_fit_models = generate_meta_features(super_learner_models, X_train, y_train_df, scaler, kf)
+
+    # 训练元模型（CoxPH）
+    # print("Training Super Learner...")
+    meta_data = pd.concat([meta_train, y_train_df.reset_index(drop=True)], axis=1)
+    super_learner = CoxPHFitter(penalizer=0.1)
+    super_learner.fit(meta_data, 'time', 'status')
+
+    models['super_learner'] = super_learner
+    return models, super_learner_fit_models
+
+def models_super_learner(models, X_train, y_train_df, X_test, y_test, scaler, y_train=None):
     # 生成元特征
     kf = KFold(n_splits=2, shuffle=True, random_state=SEED)
     print("Generating meta-features...")
@@ -184,16 +266,23 @@ def models_super_learner(models, X_train, y_train_df, X_test, y_test, scaler, y_
         if len(candidate_model_name) == 1:
             continue
         super_learner_models = dict(zip(candidate_model_name, candidate_model))
-        # print(candidate_model_name, "*"*20)
+        
         # logging.info("Super learner for : {} ".format(candidate_model_name))
-        meta_train = generate_meta_features(super_learner_models, X_train, y_train_df, scaler, kf)
+        meta_train, super_learner_fit_models = generate_meta_features(super_learner_models, X_train, y_train_df, scaler, kf)
 
         # 训练元模型（CoxPH）
         # print("Training Super Learner...")
         meta_data = pd.concat([meta_train, y_train_df.reset_index(drop=True)], axis=1)
         super_learner = CoxPHFitter(penalizer=0.1)
         super_learner.fit(meta_data, 'time', 'status')
-
+        """
+        In [4]: super_learner.params_
+        Out[4]:
+        covariate
+        CoxPH    2.112698
+        RSF      3.179582
+        Name: coef, dtype: float64
+        """
         # 生成测试集元特征
         # print("Generating test meta-features...")
         meta_test = pd.DataFrame()
@@ -274,44 +363,6 @@ def models_super_learner(models, X_train, y_train_df, X_test, y_test, scaler, y_
         # from IPython import embed;embed()
         train_c_index = concordance_index_censored(y_train['event'], y_train['time'], super_pred)[0]
 
-        meta_test = pd.DataFrame()
-        for name in models:
-            if name == 'CoxPH':
-                pred = models[name].predict_partial_hazard(external_X_test)
-            else:
-                external_X_test_scaled = external_scaler.transform(external_X_test)
-                external_X_test_scaled = pd.DataFrame(external_X_test_scaled, columns=external_X_test.columns)
-                if name == 'RSF':
-                    pred = models[name].predict(external_X_test_scaled)
-                elif name == 'svm':
-                    pred = models[name].predict(external_X_test_scaled)
-                elif name == 'GBSA':
-                    pred = models[name].predict(external_X_test_scaled)
-                elif name == 'DeepSurv':
-                    pred = models[name].predict_risk(external_X_test_scaled)
-                elif name == 'DeepHit':
-                    x_tensor = torch.tensor(external_X_test_scaled.values.astype('float32'))
-                    surv = models[name].predict_surv_df(x_tensor)
-                    t_median = np.median(external_y_test['time'])
-                    times = np.array(surv.index)
-                    idx = np.argmin(np.abs(times - t_median))
-                    pred = 1 - surv.iloc[idx].values
-                # 在生成测试集元特征的循环中补充NMTLR部分
-                elif name == 'NMTLR':
-                    x_tensor = torch.tensor(external_X_test_scaled.values.astype('float32'))
-                    surv = models[name].predict_surv_df(x_tensor)
-                    t_median = np.median(external_y_test['time'])
-                    times = np.array(surv.index)
-                    idx = np.argmin(np.abs(times - t_median))
-                    pred_raw = 1 - surv.iloc[idx].values
-                    pred = (pred_raw - pred_raw.min()) / (pred_raw.max() - pred_raw.min())
-            pred = (pred - np.min(pred)) / (np.max(pred) - np.min(pred))
-            meta_test[name] = pred
 
-        # 评估Super Learner
-        super_pred = super_learner.predict_partial_hazard(meta_test)
-        # from IPython import embed;embed()
-        external_val_c_index = concordance_index_censored(external_y_test['event'], external_y_test['time'], super_pred)[0]
-        
-        
-        logging.info("Super Learner -> {}:  Train-C-index: {} Internal-Val-C-index: {} External-Val-C-index: {}".format(candidate_model_name, train_c_index, val_c_index, external_val_c_index))
+
+        logging.info("Super Learner -> {}:  Train-C-index: {} Val-C-index: {}".format(candidate_model_name, train_c_index, val_c_index))

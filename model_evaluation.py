@@ -3,9 +3,9 @@ import pandas as pd
 from sklearn.calibration import calibration_curve
 from sksurv.metrics import concordance_index_censored
 import torch
-from sklearn.metrics import roc_curve, auc, RocCurveDisplay
+from sklearn.metrics import roc_curve, auc, roc_auc_score
 import xgboost as xgb
-
+from super_learner import get_meta_data
 # 4. 模型评估
 def evaluate_model(model, name, X, y):
     results = {}
@@ -159,14 +159,12 @@ def evaluate_model(model, name, X, y):
     
     return results
     """
-def evaluate_model_at_time(model, name, X, y, time_point):
+def evaluate_model_at_time(model, name, X, y, time_point, super_learner_fit_models=None):
     results = {}
     
     # 获取每个样本在指定时间点的事件概率
     event_prob = []
     if name == 'CoxPH':
-        # from IPython import embed;embed()
-        # exit()
         baseline_survival = model.baseline_survival_
         times_cox = baseline_survival.index.values
         pos = np.searchsorted(times_cox, time_point, side='right') - 1
@@ -180,21 +178,17 @@ def evaluate_model_at_time(model, name, X, y, time_point):
         surv_prob = np.power(s0_t, np.exp(risk_scores))
         event_prob = 1 - surv_prob
     elif name == 'RSF':
-        # # RandomSurvivalForest 的 predict_survival_function 返回数组
-        # surv_funcs = model.predict_survival_function(X)
-        # times = model.event_times_
-        # pos = np.searchsorted(times, time_point, side='right') - 1
-        # if pos < 0:
-        #     event_prob = 1 - surv_funcs[:, 0]
-        # elif pos >= len(times):
-        #     event_prob = 1 - surv_funcs[:, -1]
-        # else:
-        #     from IPython import embed;embed()
-        #     exit()
-        #     event_prob = 1 - surv_funcs[:, pos]
-        risk_scores = model.predict(X)
-        # 将风险分数转换为事件概率（假设风险分数越高，事件概率越高）
-        event_prob = 1 / (1 + np.exp(-risk_scores))
+        # RandomSurvivalForest 的 predict_survival_function 返回数组
+        surv_funcs = model.predict_survival_function(X)
+        times = model.event_times_
+        pos = np.searchsorted(times, time_point, side='right') - 1
+        if pos < 0:
+            event_prob = 1 - surv_funcs[:, 0]
+        elif pos >= len(times):
+            event_prob = 1 - surv_funcs[:, -1]
+        else:
+            event_prob = 1 - surv_funcs[:, pos]
+
     elif name == 'GBSA':
         # GradientBoostingSurvivalAnalysis 返回风险分数
         risk_scores = model.predict(X)
@@ -204,7 +198,7 @@ def evaluate_model_at_time(model, name, X, y, time_point):
         times_array = np.array([time_point])
         survival = model.predict_survival(X.values, times_array).flatten()
         event_prob = 1 - survival
-        # event_prob = np.clip(event_prob, 0, 1)  # 将超出范围的值裁剪到 [0, 1]
+        event_prob = np.clip(event_prob, 0, 1)  # 将超出范围的值裁剪到 [0, 1]
         # from IPython import embed;embed()
         # exit()
     elif name in ['DeepHit', 'NMTLR']:    
@@ -220,37 +214,77 @@ def evaluate_model_at_time(model, name, X, y, time_point):
         event_prob = 1 - surv_df.iloc[closest_idx].values
         # from IPython import embed;embed()
         # exit()
-        # event_prob = np.clip(event_prob, 0, 1)  # 将超出范围的值裁剪到 [0, 1]
-    elif name == 'svm':
-        risk_scores = model.predict(X)
-        # 将风险分数转换为事件概率（假设风险分数越高，事件概率越高）
-        event_prob = 1 / (1 + np.exp(-risk_scores))  # 使用逻辑函数转换
+    elif name  == 'svm':
+        # from IPython import embed;embed()
+        # exit()
+        event_prob = model.predict(X)
+        event_prob = 1 / (1 + np.exp(-event_prob))
+        # from IPython import embed;embed()
+        # exit()
+    elif name == 'super_learner':
+        # from IPython import embed;embed()
+        # exit()
+        # X_meta = get_meta_data(super_learner_fit_models, X, y['time'].mean())
+        X_meta = get_meta_data(super_learner_fit_models, X, t_median=92.59686411149826) #time from y_train
+        baseline_survival = model.baseline_survival_
+        times_cox = baseline_survival.index.values
+        # 找到时间点对应的位置
+        pos = np.searchsorted(times_cox, time_point, side='right') - 1
+        if pos < 0:
+            s0_t = 1.0
+        elif pos >= len(times_cox):
+            s0_t = 0.0
+        else:
+            s0_t = baseline_survival.iloc[pos, 0]
+        risk_scores = model.predict_partial_hazard(X_meta)
+        # 计算事件概率
+        surv_prob = np.power(s0_t, np.exp(risk_scores))
+        event_prob = 1 - surv_prob
     else:
         event_prob = model.predict(X)
     
-    # 构建二元标签（排除在指定时间点之前删失的样本）
-    # from IPython import embed;embed()
-    # exit()
-    # mask = (y['time'] > time_point) | (y['event'] == 1)
-    # mask = (y['time'] <= time_point)
-    # # y_binary = ((y['time'] <= time_point) & y['event']).astype(int)
-    # y_binary = ((y['time'] <= time_point)).astype(int)
-    # y_binary_filtered = y_binary[mask]
-    # event_prob_filtered = np.array(event_prob)[mask]
-    
-    mask = (y['time'] <= time_point) | (y['event'] == 1)
-    y_binary = (y['event']).astype(int)
+    # # 构建二元标签（排除在指定时间点之前删失的样本）
+    mask = (y['time'] > time_point) | (y['event'] == 1)
+    y_binary = ((y['time'] <= time_point) & y['event']).astype(int)
     y_binary_filtered = y_binary[mask]
     event_prob_filtered = np.array(event_prob)[mask]
-    
+
     # 计算AUC和ROC曲线
     if len(np.unique(y_binary_filtered)) >= 2:
-        # from IPython import embed;embed()
-        # exit()
         fpr, tpr, _ = roc_curve(y_binary_filtered, event_prob_filtered)
         roc_auc = auc(fpr, tpr)
         results['AUC'] = roc_auc
         results['ROC'] = (fpr, tpr, roc_auc)
+
+        n_bootstraps = 1000  # 重采样次数
+        rng_seed = 42  # 随机种子确保可重复性
+        bootstrapped_auc = []
+        rng = np.random.RandomState(rng_seed)
+
+        for _ in range(n_bootstraps):
+            # 有放回地抽取样本索引
+            indices = rng.choice(len(y_binary_filtered), size=len(y_binary_filtered), replace=True)
+            y_sample = y_binary_filtered[indices]
+            prob_sample = event_prob_filtered[indices]
+            
+            # 确保样本中有两个类别
+            if len(np.unique(y_sample)) < 2:
+                continue  # 跳过单类样本
+                
+            # # 计算当前样本的AUC
+            auc_score = roc_auc_score(y_sample, prob_sample)
+            bootstrapped_auc.append(auc_score)
+    
+        # 计算置信区间
+        if len(bootstrapped_auc) > 0:
+            sorted_auc = np.sort(bootstrapped_auc)
+            ci_lower = sorted_auc[int(0.025 * len(sorted_auc))]
+            ci_upper = sorted_auc[int(0.975 * len(sorted_auc))]
+        else:
+            ci_lower = ci_upper = np.nan  # 无有效Bootstrap样本
+        
+        results['AUC_CI'] = (ci_lower, ci_upper)
+
     else:
         results['AUC'] = np.nan
         results['ROC'] = (np.nan, np.nan, np.nan)

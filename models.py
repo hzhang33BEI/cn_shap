@@ -232,23 +232,23 @@ def train_base_models(X_train_scaled, X_train, y_train, X_test_scaled, X_test, y
     models['GBSA'] = gbs
 
 
-    # 定义 DeepSurv 参数搜索网格
-    param_grid_ds = {
-        'lr': [1e-3, 1e-4],
-        'num_epochs': [200, 400],
-        'optimizer': ['adam']
-    }
+    # # 定义 DeepSurv 参数搜索网格
+    # param_grid_ds = {
+    #     'lr': [1e-3, 1e-4],
+    #     'num_epochs': [200, 400],
+    #     'optimizer': ['adam']
+    # }
 
-    # print("开始 DeepSurv 超参数调优……")
-    # best_params_ds, best_score_ds, ds_scores = deep_surv_cv(X_train_scaled, y_train_df, param_grid_ds)
-    # print("DeepSurv 最佳超参数：", best_params_ds, "对应 C-index：", best_score_ds)
+    # # print("开始 DeepSurv 超参数调优……")
+    # # best_params_ds, best_score_ds, ds_scores = deep_surv_cv(X_train_scaled, y_train_df, param_grid_ds)
+    # # print("DeepSurv 最佳超参数：", best_params_ds, "对应 C-index：", best_score_ds)
 
-    # 用最佳超参数在全训练集上重新训练 DeepSurv 模型
-    ds_model = LinearMultiTaskModel()
-    ds_model.fit(X_train_scaled, y_train['time'], y_train['event'], 
-                init_method='orthogonal', optimizer=best_params_ds['optimizer'],
-                lr=best_params_ds['lr'], num_epochs=best_params_ds['num_epochs'], verbose=False)
-    models['DeepSurv'] = ds_model
+    # # 用最佳超参数在全训练集上重新训练 DeepSurv 模型
+    # ds_model = LinearMultiTaskModel()
+    # ds_model.fit(X_train_scaled, y_train['time'], y_train['event'], 
+    #             init_method='orthogonal', optimizer=best_params_ds['optimizer'],
+    #             lr=best_params_ds['lr'], num_epochs=best_params_ds['num_epochs'], verbose=False)
+    # models['DeepSurv'] = ds_model
 
 
 
