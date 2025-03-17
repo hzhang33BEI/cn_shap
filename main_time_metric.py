@@ -547,12 +547,12 @@ if __name__ == "__main__":
                 # res = evaluate_model_at_time(
                 #     model, name, X_test_scaled, y_test, time_point, super_learner_fit_models=super_learner_fit_models
                 # )
-                # res = evaluate_model_at_time(
-                #     model, name, X_train_scaled, y_train, time_point, super_learner_fit_models=super_learner_fit_models
-                # )
                 res = evaluate_model_at_time(
-                    model, name, external_X_test_scaled, external_y_test, time_point, super_learner_fit_models=super_learner_fit_models
+                    model, name, X_train_scaled, y_train, time_point, super_learner_fit_models=super_learner_fit_models
                 )
+                # res = evaluate_model_at_time(
+                #     model, name, external_X_test_scaled, external_y_test, time_point, super_learner_fit_models=super_learner_fit_models
+                # )
             all_results[name][time_point] = res
             print(
                 f"    C-index: {res.get('C-index', 'N/A')}, AUC: {res.get('AUC', 'N/A')}"
@@ -581,7 +581,9 @@ if __name__ == "__main__":
                 save_data[save_data_key + '_fpr'] = fpr
                 save_data[save_data_key + '_tpr'] = tpr
 
-                save_data.to_csv('auc_external_val_{}_{}.csv'.format(name, time_point), index=False)
+                # save_data.to_csv('auc_internal_val_{}_{}.csv'.format(name, time_point), index=False)
+                save_data.to_csv('auc_train_{}_{}.csv'.format(name, time_point), index=False)
+
         plt.plot([0, 1], [0, 1], color="navy", lw=2, linestyle="--")
         plt.xlabel("False Positive Rate")
         plt.ylabel("True Positive Rate")

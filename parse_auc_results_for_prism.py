@@ -15,7 +15,7 @@ def get_auc_ci_from_str(str):
     return auc, ci[0], ci[1]
         
 if __name__ == "__main__":
-    split = 'train'
+    split = 'val'
     data_root = "model_results/auc/{}/".format(split)
     models = ["DeepHit", "CoxPH", "RSF", "GBSA", "NMTLR","svm","super_learner"]
     months = [12, 24]

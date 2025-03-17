@@ -249,14 +249,17 @@ def evaluate_model_at_time(model, name, X, y, time_point, super_learner_fit_mode
     y_binary_filtered = y_binary[mask]
     event_prob_filtered = np.array(event_prob)[mask]
 
+    tpr_list = []
+    fpr_grid = np.linspace(0, 1, 100)  # 定义统一的 FPR 网格
+
     # 计算AUC和ROC曲线
     if len(np.unique(y_binary_filtered)) >= 2:
-        fpr, tpr, _ = roc_curve(y_binary_filtered, event_prob_filtered)
-        roc_auc = auc(fpr, tpr)
-        results['AUC'] = roc_auc
-        results['ROC'] = (fpr, tpr, roc_auc)
+        # fpr, tpr, _ = roc_curve(y_binary_filtered, event_prob_filtered)
+        # roc_auc = auc(fpr, tpr)
+        # results['AUC'] = roc_auc
+        # results['ROC'] = (fpr, tpr, roc_auc)
 
-        n_bootstraps = 1000  # 重采样次数
+        n_bootstraps = 100  # 重采样次数
         rng_seed = 42  # 随机种子确保可重复性
         bootstrapped_auc = []
         rng = np.random.RandomState(rng_seed)
@@ -266,6 +269,8 @@ def evaluate_model_at_time(model, name, X, y, time_point, super_learner_fit_mode
             indices = rng.choice(len(y_binary_filtered), size=len(y_binary_filtered), replace=True)
             y_sample = y_binary_filtered[indices]
             prob_sample = event_prob_filtered[indices]
+
+
             
             # 确保样本中有两个类别
             if len(np.unique(y_sample)) < 2:
@@ -274,6 +279,12 @@ def evaluate_model_at_time(model, name, X, y, time_point, super_learner_fit_mode
             # # 计算当前样本的AUC
             auc_score = roc_auc_score(y_sample, prob_sample)
             bootstrapped_auc.append(auc_score)
+
+            fpr, tpr, _ = roc_curve(y_sample, prob_sample)
+        
+            # 插值到统一 FPR 网格
+            tpr_interpolated = np.interp(fpr_grid, fpr, tpr)
+            tpr_list.append(tpr_interpolated)
     
         # 计算置信区间
         if len(bootstrapped_auc) > 0:
@@ -284,6 +295,12 @@ def evaluate_model_at_time(model, name, X, y, time_point, super_learner_fit_mode
             ci_lower = ci_upper = np.nan  # 无有效Bootstrap样本
         
         results['AUC_CI'] = (ci_lower, ci_upper)
+        mean_tpr = np.mean(tpr_list, axis=0)
+        # from IPython import embed;embed()
+        # exit()
+        results['AUC'] = np.mean(sorted_auc)
+        results['ROC'] = (fpr_grid, mean_tpr, np.mean(sorted_auc))
+
 
     else:
         results['AUC'] = np.nan
